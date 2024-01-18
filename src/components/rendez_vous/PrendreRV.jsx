@@ -24,14 +24,6 @@ export default function PrendreRV() {
   };
 
   const [rendezVous, setRendezVous] = useState(newRendezVous);
-  //   const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setRendezVous((prevRendezVous) => ({
-  //       ...prevRendezVous,
-  //       [name]: value,
-  //     }));
-  //     // console.log(patient);
-  //   };
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -41,31 +33,30 @@ export default function PrendreRV() {
     console.log(rendezVous);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, idMedecin) => {
     event.preventDefault();
 
     // Envoyez une requête POST à l'API
     axios
-      .post(`http://localhost:8080/api/rendezVous/add/${idPatient}`, rendezVous)
+      .post(
+        `http://localhost:8080/api/rendezVous/add/1/${idMedecin}`,
+        rendezVous
+      )
       .then((response) => {
-        // Gérez la réponse de l'API en fonction de vos besoins
         console.log("Ajouté avec succès:", response.data);
       })
       .catch((error) => {
-        // Gérez les erreurs en fonction de vos besoins
         console.error("Erreur lors de l'ajout:", error);
       });
     //   navigate("/patients/list");
   };
 
   useEffect(() => {
-    // Faites appel à votre API Spring Boot avec les paramètres de pagination et de recherche
     axios
       .get(
         `http://localhost:8080/api/patient/list?name=${keyword}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
-        // Mettez à jour les états liés à la pagination
         setTotalPages(response.data.totalPages);
         setVisiblePatients(response.data.content);
       })
@@ -99,13 +90,12 @@ export default function PrendreRV() {
   };
   const customStyles = {
     content: {
-      width: "25%", // Ajustez la largeur comme nécessaire
-      margin: "auto", // Centrez le modal horizontalement
-      // Autres styles personnalisés
+      width: "25%", 
+      margin: "auto", 
       backgroundColor: "rgba(255, 255, 255, 0.8)",
     },
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond semi-transparent
+      backgroundColor: "rgba(0, 0, 0, 0.7)", 
     },
   };
 
@@ -184,7 +174,7 @@ export default function PrendreRV() {
                 <div className="text-center">
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={closeModal}
+                    onClick={() => handleSubmit(selectedImageIndex)}
                   >
                     Demander un Rendez-vous
                   </button>

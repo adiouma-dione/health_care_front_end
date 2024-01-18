@@ -36,16 +36,13 @@ export default function EditConsultation() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Effectue une requête PUT pour mettre à jour le consultation
     axios
       .put(`http://localhost:8080/api/consultation/update`, consultation)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
-        // Ajoutez un code pour gérer la réussite de la mise à jour
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour:", error);
-        // Ajoutez un code pour gérer les erreurs de mise à jour
       });
   };
 

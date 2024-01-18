@@ -29,15 +29,12 @@ export default function AddTraitement() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Envoyez une requête POST à l'API
     axios
       .post(`http://localhost:8080/api/traitement/add/${idPatient}`, traitement)
       .then((response) => {
-        // Gérez la réponse de l'API en fonction de vos besoins
         console.log("Ajouté avec succès:", response.data);
       })
       .catch((error) => {
-        // Gérez les erreurs en fonction de vos besoins
         console.error("Erreur lors de l'ajout:", error);
       });
     //   navigate("/patients/list");
@@ -110,7 +107,6 @@ export default function AddTraitement() {
               <option value="9">9</option>
               <option value="1O">1O</option>
             </select>
-            {/* <!-- <input type="password" id="inputPassword6" className="form-control form-control-lg" aria-describedby="passwordHelpInline"> --> */}
           </div>
           <div className="col-auto">
             <span id="frequence" className="form-text">

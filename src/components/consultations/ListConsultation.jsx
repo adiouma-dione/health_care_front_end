@@ -39,11 +39,9 @@ export default function ListConsultation() {
         .post(`http://localhost:8080/api/consultation/delete/${idConsultation}`)
         .then((response) => {
           // window.location.reload();
-          // Gérez la réponse de l'API en fonction de vos besoins
           console.log("Supprimé avec succès:", response.data);
         })
         .catch((error) => {
-          // Gérez les erreurs en fonction de vos besoins
           console.error("Erreur lors de la suppresion:", error);
         });
       setVisibleConsultations(

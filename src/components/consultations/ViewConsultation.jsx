@@ -12,7 +12,6 @@ export default function ViewConsultation() {
   const [consultation, setConsultation] = useState(newConsultation);
 
   useEffect(() => {
-    // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
       .get(`http://localhost:8080/api/consultation/${idConsultation}`)
       .then((response) => {
@@ -42,7 +41,6 @@ export default function ViewConsultation() {
                   <tr>
                     <th scope="row">Date</th>
                     <td
-                    // th:text="${consultation.dateConsultation}"
                     >
                       {consultation.date}
                     </td>
@@ -50,7 +48,6 @@ export default function ViewConsultation() {
                   <tr>
                     <th scope="row">Compte rendu</th>
                     <td
-                    // th:text="${consultation.compteRendu}"
                     >
                       {consultation.compteRendu}
                       {/* Le patient a exprimé des inquiétudes concernant son régime
@@ -67,19 +64,6 @@ export default function ViewConsultation() {
                 >
                   Retour
                 </Link>
-                {/* <a
-                  //   th:href="@{/consultations-editer(idConsultation=${consultation.idConsultation}, idDossier=${idDossier})}"
-                  className="btn btn-success"
-                >
-                  <i className="bi bi-pencil-square"></i> Modifier
-                </a>
-                <a
-                  //   onclick="return confirm('Êtes-vous sûr ?')"
-                  //   th:href="@{/consultations-delete(idConsultation=${consultation.idConsultation}, idDossier=${idDossier}, page=${currentPage})}"
-                  className="btn btn-danger"
-                >
-                  <i className="bi bi-trash3"></i> Supprimer
-                </a> */}
               </div>
             </div>
           </div>

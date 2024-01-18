@@ -14,7 +14,6 @@ export default function ViewFacture() {
   const [facture, setFacture] = useState(newFacture);
 
   useEffect(() => {
-    // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
       .get(`http://localhost:8080/api/facture/${idFacture}`)
       .then((response) => {
@@ -54,9 +53,6 @@ export default function ViewFacture() {
                     <th scope="row">Compte rendu</th>
                     <td>
                       {facture.designation}
-                      {/* Le patient a exprimé des inquiétudes concernant son régime
-                      alimentaire. Un plan nutritionnel a été élaboré pour
-                      soutenir la gestion de son hypertension et de son diabète. */}
                     </td>
                   </tr>
                 </tbody>

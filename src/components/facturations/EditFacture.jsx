@@ -14,7 +14,6 @@ export default function EditFacture() {
   const [facture, setFacture] = useState(newFacture);
 
   useEffect(() => {
-    // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
       .get(`http://localhost:8080/api/facture/${idFacture}`)
       .then((response) => {
@@ -37,20 +36,16 @@ export default function EditFacture() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Effectue une requête PUT pour mettre à jour le facture
     axios
       .put(`http://localhost:8080/api/facture/update`, facture)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
-        // Ajoutez un code pour gérer la réussite de la mise à jour
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour:", error);
-        // Ajoutez un code pour gérer les erreurs de mise à jour
       });
   };
 
-              // value={facture.date}
   return (
     <div className="container">
       <div className="form-container mt-5 mb-5">

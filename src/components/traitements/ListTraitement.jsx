@@ -13,13 +13,11 @@ export default function ListTraitement() {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
-    // Faites appel à votre API Spring Boot avec les paramètres de pagination et de recherche
     axios
       .get(
         `http://localhost:8080/api/traitement/list?idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
-        // Mettez à jour les états liés à la pagination
         setTotalPages(response.data.totalPages);
         setVisibleTraitements(response.data.content);
         console.log(response.data);
@@ -39,11 +37,9 @@ export default function ListTraitement() {
         .post(`http://localhost:8080/api/traitement/delete/${idTraitement}`)
         .then((response) => {
           // window.location.reload();
-          // Gérez la réponse de l'API en fonction de vos besoins
           console.log("Supprimé avec succès:", response.data);
         })
         .catch((error) => {
-          // Gérez les erreurs en fonction de vos besoins
           console.error("Erreur lors de la suppresion:", error);
         });
       setVisibleTraitements(

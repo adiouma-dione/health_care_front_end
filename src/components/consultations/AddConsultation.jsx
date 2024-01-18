@@ -13,14 +13,6 @@ export default function AddConsultation() {
   };
 
   const [consultation, setConsultation] = useState(newConsultation);
-  //   const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setConsultation((prevConsultation) => ({
-  //       ...prevConsultation,
-  //       [name]: value,
-  //     }));
-  //     // console.log(patient);
-  //   };
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -37,7 +29,6 @@ export default function AddConsultation() {
 
     // setConsultation(newConsultation);
 
-    // Envoyez une requête POST à l'API
     axios
       .post(
         `http://localhost:8080/api/consultation/add/${idPatient}`,
@@ -46,11 +37,9 @@ export default function AddConsultation() {
       .then((response) => {
         console.log(`Debug 2: ${consultation.date}`);
 
-        // Gérez la réponse de l'API en fonction de vos besoins
         console.log("Ajouté avec succès:", response.data);
       })
       .catch((error) => {
-        // Gérez les erreurs en fonction de vos besoins
         console.error("Erreur lors de l'ajout:", error);
       });
     //   navigate("/patients/list");

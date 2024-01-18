@@ -41,16 +41,13 @@ export default function EditTraitement() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Effectue une requête PUT pour mettre à jour le traitement
     axios
       .put(`http://localhost:8080/api/traitement/update`, traitement)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
-        // Ajoutez un code pour gérer la réussite de la mise à jour
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour:", error);
-        // Ajoutez un code pour gérer les erreurs de mise à jour
       });
   };
 
@@ -126,7 +123,6 @@ export default function EditTraitement() {
                 <option value="9">9</option>
                 <option value="1O">1O</option>
               </select>
-              {/* <!-- <input type="password" id="inputPassword6" className="form-control form-control-lg" aria-describedby="passwordHelpInline"> --> */}
             </div>
             <div className="col-auto">
               <span id="frequence" className="form-text">

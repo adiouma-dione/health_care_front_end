@@ -17,7 +17,6 @@ export default function ViewTraitement() {
   const [traitement, setTraitement] = useState(newTraitement);
 
   useEffect(() => {
-    // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
       .get(`http://localhost:8080/api/traitement/${idTraitement}`)
       .then((response) => {

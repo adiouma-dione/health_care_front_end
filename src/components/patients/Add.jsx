@@ -31,15 +31,12 @@ export default function Add() {
 
     setPatient(personne);
 
-    // Envoyez une requête POST à l'API
     axios
       .post("http://localhost:8080/api/patient/add", patient)
       .then((response) => {
-        // Gérez la réponse de l'API en fonction de vos besoins
         console.log("Ajouté avec succès:", response.data);
       })
       .catch((error) => {
-        // Gérez les erreurs en fonction de vos besoins
         console.error("Erreur lors de l'ajout:", error);
       });
     navigate("/patients/list");

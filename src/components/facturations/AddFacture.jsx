@@ -14,14 +14,6 @@ export default function AddFacture() {
   };
 
   const [facture, setFacture] = useState(newFacture);
-  //   const handleChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setFacture((prevFacture) => ({
-  //       ...prevFacture,
-  //       [name]: value,
-  //     }));
-  //     // console.log(patient);
-  //   };
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -34,18 +26,15 @@ export default function AddFacture() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Envoyez une requête POST à l'API
     axios
       .post(
         `http://localhost:8080/api/facture/add/${idPatient}`,
         facture
       )
       .then((response) => {
-        // Gérez la réponse de l'API en fonction de vos besoins
         console.log("Ajouté avec succès:", response.data);
       })
       .catch((error) => {
-        // Gérez les erreurs en fonction de vos besoins
         console.error("Erreur lors de l'ajout:", error);
       });
     //   navigate("/patients/list");

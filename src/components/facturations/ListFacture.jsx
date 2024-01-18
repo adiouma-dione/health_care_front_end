@@ -13,13 +13,11 @@ export default function ListFacture() {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
-    // Faites appel à votre API Spring Boot avec les paramètres de pagination et de recherche
     axios
       .get(
         `http://localhost:8080/api/facture/list?date=&idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
-        // Mettez à jour les états liés à la pagination
         setTotalPages(response.data.totalPages);
         setVisibleFactures(response.data.content);
         console.log(response.data);
@@ -39,11 +37,9 @@ export default function ListFacture() {
         .post(`http://localhost:8080/api/facture/delete/${idFacture}`)
         .then((response) => {
           // window.location.reload();
-          // Gérez la réponse de l'API en fonction de vos besoins
           console.log("Supprimé avec succès:", response.data);
         })
         .catch((error) => {
-          // Gérez les erreurs en fonction de vos besoins
           console.error("Erreur lors de la suppresion:", error);
         });
       setVisibleFactures(

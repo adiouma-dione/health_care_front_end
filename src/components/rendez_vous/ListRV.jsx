@@ -11,13 +11,11 @@ export default function ListRV() {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
-    // Faites appel à votre API Spring Boot avec les paramètres de pagination et de recherche
     axios
       .get(
         `http://localhost:8080/api/rendezVous/list?date=${keyword}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
-        // Mettez à jour les états liés à la pagination
         setTotalPages(response.data.totalPages);
         setVisibleRendezVouss(response.data.content);
         console.log(response.data);
@@ -37,11 +35,9 @@ export default function ListRV() {
         .post(`http://localhost:8080/api/rendezVous/delete/${idRendezVous}`)
         .then((response) => {
           // window.location.reload();
-          // Gérez la réponse de l'API en fonction de vos besoins
           console.log("Supprimé avec succès:", response.data);
         })
         .catch((error) => {
-          // Gérez les erreurs en fonction de vos besoins
           console.error("Erreur lors de la suppresion:", error);
         });
       setVisibleRendezVouss(

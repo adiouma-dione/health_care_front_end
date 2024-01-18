@@ -19,7 +19,6 @@ export default function Edit() {
   const [patient, setPatient] = useState(newPatient);
 
   useEffect(() => {
-    // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
       .get(`http://localhost:8080/api/patient/${idPatient}`)
       .then((response) => {
@@ -44,17 +43,14 @@ export default function Edit() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Effectue une requête PUT pour mettre à jour le patient
     axios
       .put(`http://localhost:8080/api/patient/update`, patient)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
-        // Ajoutez un code pour gérer la réussite de la mise à jour
         
       })
       .catch((error) => {
         console.error("Erreur lors de la mise à jour:", error);
-        // Ajoutez un code pour gérer les erreurs de mise à jour
       });
   };
 
