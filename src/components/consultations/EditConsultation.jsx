@@ -15,7 +15,7 @@ export default function EditConsultation() {
   useEffect(() => {
     // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
-      .get(`http://localhost:8080/api/consultation/${idConsultation}`)
+      .get(`http://localhost:9090/api/consultation/${idConsultation}`)
       .then((response) => {
         setConsultation(response.data);
         
@@ -37,7 +37,7 @@ export default function EditConsultation() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:8080/api/consultation/update`, consultation)
+      .put(`http://localhost:9090/api/consultation/update`, consultation)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
       })

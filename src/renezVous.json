@@ -1,0 +1,47 @@
+[
+    {
+        "is_confirmed": 0,
+        "id_medecin": 1,
+        "id_patient": 1,
+        "id_rendez_vous": 1,
+        "date_rendez_vous": "",
+        "heure_rendez_vous": "",
+        "motif": ""
+    },
+    {
+        "is_confirmed": 0,
+        "id_medecin": 1,
+        "id_patient": 1,
+        "id_rendez_vous": 2,
+        "date_rendez_vous": "",
+        "heure_rendez_vous": "",
+        "motif": ""
+    },
+    {
+        "is_confirmed": 1,
+        "id_medecin": 2,
+        "id_patient": 2,
+        "id_rendez_vous": 3,
+        "date_rendez_vous": "",
+        "heure_rendez_vous": "",
+        "motif": ""
+    },
+    {
+        "is_confirmed": 1,
+        "id_medecin": 3,
+        "id_patient": 3,
+        "id_rendez_vous": 4,
+        "date_rendez_vous": "",
+        "heure_rendez_vous": "",
+        "motif": ""
+    },
+    {
+        "is_confirmed": 1,
+        "id_medecin": 1,
+        "id_patient": 1,
+        "id_rendez_vous": 5,
+        "date_rendez_vous": "",
+        "heure_rendez_vous": "",
+        "motif": ""
+    }
+]

@@ -13,7 +13,7 @@ export default function ViewConsultation() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/consultation/${idConsultation}`)
+      .get(`http://localhost:9090/api/consultation/${idConsultation}`)
       .then((response) => {
         setConsultation(response.data);
       })

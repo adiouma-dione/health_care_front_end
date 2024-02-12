@@ -31,7 +31,7 @@ export default function AddConsultation() {
 
     axios
       .post(
-        `http://localhost:8080/api/consultation/add/${idPatient}`,
+        `http://localhost:9090/api/consultation/add/${idPatient}`,
         consultation
       )
       .then((response) => {

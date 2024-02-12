@@ -15,7 +15,7 @@ export default function ListTraitement() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/api/traitement/list?idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
+        `http://localhost:9090/api/traitement/list?idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
         setTotalPages(response.data.totalPages);
@@ -34,7 +34,7 @@ export default function ListTraitement() {
   const handleDelete = (idTraitement) => {
     if (confirmDelete()) {
       axios
-        .post(`http://localhost:8080/api/traitement/delete/${idTraitement}`)
+        .post(`http://localhost:9090/api/traitement/delete/${idTraitement}`)
         .then((response) => {
           // window.location.reload();
           console.log("Supprimé avec succès:", response.data);

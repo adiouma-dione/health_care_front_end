@@ -18,7 +18,7 @@ export default function ViewTraitement() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/traitement/${idTraitement}`)
+      .get(`http://localhost:9090/api/traitement/${idTraitement}`)
       .then((response) => {
         setTraitement(response.data);
       })

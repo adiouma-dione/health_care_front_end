@@ -31,7 +31,8 @@ h2 {
 }
 
 .infos-patient-container,
-.form-container {
+.form-container,
+.form-container-login {
   background-color: rgba(255, 255, 255, 0);
   backdrop-filter: blur(5px);
   padding: 30px;
@@ -39,6 +40,10 @@ h2 {
   max-width: 60%;
   margin: 0 auto;
   box-shadow: #5e5e5e 0px 0px 25px;
+}
+
+.form-container-login {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .img-consulter-all {
@@ -334,10 +339,10 @@ table td {
   display: block;
   width: 100%;
 }
-.list-group-costume-1 a:hover {
-}
+/* .list-group-costume-1 a:hover {
+} */
 .list-group-item-costume-1:hover {
-  background-color: #ececec;
+  background-color: #ddd;
 }
 
 /* ! -------------------------------------------------------------------------- */
@@ -349,7 +354,7 @@ table td {
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  color: #fff;
+  color: #000;
   font-weight: 500;
 }
 
@@ -380,12 +385,12 @@ table td {
 /* !                                 Rendez-vous                                */
 /* ! -------------------------------------------------------------------------- */
 
-.dr-cards-container {
-  /* display: flex;
+/* .dr-cards-container {
+  display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap; */
-}
+  flex-wrap: wrap; 
+} */
 
 .dr-frofil-container {
   width: 25%;
@@ -420,3 +425,5 @@ table td {
 .card-img-modal {
   min-height: 22vh;
 }
+
+

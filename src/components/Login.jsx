@@ -3,10 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+
+const clearSession = () => {
+  sessionStorage.clear();
+}
   const newUser = {
     username: "",
     password: "",
   };
+
   const [user, setUser] = useState(newUser);
 
   const handleChange = (e) => {
@@ -18,26 +23,20 @@ export default function Login() {
   };
 
   const handleSubmit = () => {
-    if (user.username === "adiouma10@gmail.com" && user.password === "1234") {
-      sessionStorage.setItem("username", user.username);
-      sessionStorage.setItem("password", user.password);
-      navigate("/patients/list");
-    } else if (
-      user.username === "neufdione@gmail.com" &&
-      user.password === "1234"
-    ) {
-      sessionStorage.setItem("username", user.username);
-      sessionStorage.setItem("password", user.password);
-      navigate("/rendez-vous/take");
-    } else {
-      navigate("/");
-    }
+    sessionStorage.setItem("username", user.username);
+    sessionStorage.setItem("password", user.password);
+    const newUser = {
+      username: "",
+      password: "",
+    };
+    setUser(newUser);
+    navigate("/home");
   };
 
   return (
-    <div className="form-container w-100 mb-5">
+    <div className="form-container-login w-100 mb-5">
+      {clearSession()}
       <h2 className="mb-5">Connexion</h2>
-
       <form onSubmit={handleSubmit}>
         <div className="form-floating mb-3 prenom">
           <input

@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function AddFacture() {
-  const { idPatient } = useParams();
+  // const { idPatient } = useParams();
   //   console.log(idPatient);
+
+  const idPatient = sessionStorage.getItem("idPatient");
+  console.log("idPatient : ", idPatient);
 
   const newFacture = {
     idFacture: null,
@@ -27,10 +30,7 @@ export default function AddFacture() {
     event.preventDefault();
 
     axios
-      .post(
-        `http://localhost:8080/api/facture/add/${idPatient}`,
-        facture
-      )
+      .post(`http://localhost:9090/api/facture/add/${idPatient}`, facture)
       .then((response) => {
         console.log("Ajouté avec succès:", response.data);
       })
@@ -87,10 +87,7 @@ export default function AddFacture() {
             <button type="submit" className="btn btn-primary">
               Ajouter
             </button>
-            <Link
-              to={`/patients/${idPatient}/factures`}
-              className="btn btn-primary"
-            >
+            <Link to={`/patients/list`} className="btn btn-primary">
               Retour
             </Link>
           </div>

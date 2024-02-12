@@ -29,6 +29,61 @@ import ListFacture from "./components/facturations/ListFacture";
 import ViewFacture from "./components/facturations/ViewFacture";
 import ListRV from "./components/rendez_vous/ListRV";
 import PrendreRV from "./components/rendez_vous/PrendreRV";
+import Home from "./components/Home";
+import EditRV from "./components/rendez_vous/EditRV";
+import AddUser from "./components/users/AddUser";
+import ListUser from "./components/users/ListUser";
+import EditMedecin from "./components/users/EditMedecin";
+import EditSecretaire from "./components/users/EditSecretaire";
+
+// =====================================================================
+
+// import Keycloak from "keycloak-js";
+// import { httpClient } from "./HttpClient";
+// // import httpClient from
+// /*
+//   Init Options
+// */
+// let initOptions = {
+//   url: "http://localhost:8080/",
+//   realm: "health-care",
+//   clientId: "health-care-front",
+// };
+
+// let kc = new Keycloak(initOptions);
+
+// kc.init({
+//   onLoad: "login-required", // Supported values: 'check-sso' , 'login-required'
+//   checkLoginIframe: true,
+//   pkceMethod: "S256",
+// }).then(
+//   (auth) => {
+//     if (!auth) {
+//       window.location.reload();
+//     } else {
+//       /* Remove below logs if you are using this on production */
+//       console.info("Authenticated");
+//       console.log("auth", auth);
+//       console.log("Keycloak", kc);
+//       console.log("Access Token", kc.token);
+
+//       /* http client will use this header in every request it sends */
+//       httpClient.defaults.headers.common[
+//         "Authorization"
+//       ] = `Bearer ${kc.token}`;
+
+//       kc.onTokenExpired = () => {
+//         console.log("token expired");
+//       };
+//     }
+//   },
+//   () => {
+//     /* Notify the user if necessary */
+//     console.error("Authentication Failed");
+//   }
+// );
+
+// ====================================================================
 
 function App() {
   return (
@@ -38,6 +93,9 @@ function App() {
         <div className="container container-home">
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+          </Routes>
+          <Routes>
             <Route path="/patients" element={<Outlet />}>
               <Route path="list" element={<List />} />
               <Route path="add" element={<Add />} />
@@ -85,7 +143,17 @@ function App() {
             </Route>
             <Route path="/rendez-vous" element={<Outlet />}>
               <Route path="" element={<ListRV />} />
-              <Route path="take" element={<PrendreRV />} />
+              <Route path=":username" element={<ListRV />} />
+              <Route path="edit" element={<EditRV />} />
+            </Route>
+
+            <Route path="facture/add" element={<AddFacture />} />
+
+            <Route path="/users" element={<Outlet />}>
+              <Route path="" element={<ListUser />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit-medecin" element={<EditMedecin />} />
+              <Route path="edit-secretaire" element={<EditSecretaire />} />
             </Route>
           </Routes>
         </div>

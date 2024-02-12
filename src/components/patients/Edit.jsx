@@ -20,7 +20,7 @@ export default function Edit() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/patient/${idPatient}`)
+      .get(`http://localhost:9090/api/patient/${idPatient}`)
       .then((response) => {
         setPatient(response.data);
       })
@@ -44,7 +44,7 @@ export default function Edit() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:8080/api/patient/update`, patient)
+      .put(`http://localhost:9090/api/patient/update`, patient)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
         

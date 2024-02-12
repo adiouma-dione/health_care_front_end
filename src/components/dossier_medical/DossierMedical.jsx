@@ -9,7 +9,7 @@ export default function DossierMedical() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/patient/${idPatient}`)
+      .get(`http://localhost:9090/api/patient/${idPatient}`)
       .then((response) => {
         setPatient(response.data);
         setDossierMedical(response.data.dossierMedical);
@@ -83,11 +83,6 @@ export default function DossierMedical() {
           >
             <div className="row g-0 row-g-0-costume">
               <div className="col-md-4 img-dm-icons img-dm-icon-1">
-                {/* <img
-                  src="../../img/cr-consultation.jpg"
-                  className="img-fluid rounded-start"
-                  alt="..."
-                /> */}
               </div>
               <div className="col-md-8 card-body-container">
                 <p className="card-text card-text-costum">Consultations</p>
@@ -102,11 +97,6 @@ export default function DossierMedical() {
           >
             <div className="row g-0 row-g-0-costume">
               <div className="col-md-4 img-dm-icons img-dm-icon-2">
-                {/* <img
-                  src="../../img/traitement.jpg"
-                  className="img-fluid rounded-start w-100"
-                  alt="..."
-                /> */}
               </div>
               <div className="col-md-8 card-body-container">
                 <p className="card-text card-text-costum">Traitements</p>

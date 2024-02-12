@@ -6,6 +6,8 @@ export default function AddTraitement() {
   const { idPatient } = useParams();
   //   console.log(idPatient);
 
+  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
   const newTraitement = {
     idTraitement: null,
     nomMedicament: "",
@@ -30,7 +32,7 @@ export default function AddTraitement() {
     event.preventDefault();
 
     axios
-      .post(`http://localhost:8080/api/traitement/add/${idPatient}`, traitement)
+      .post(`http://localhost:9090/api/traitement/add/${idPatient}`, traitement)
       .then((response) => {
         console.log("Ajouté avec succès:", response.data);
       })
@@ -96,16 +98,9 @@ export default function AddTraitement() {
               className="form-select form-select mb-3"
             >
               <option>Sélectionner</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="1O">1O</option>
+              {options.map(option => (
+                <option value={option}>{option}</option>                
+              ))}
             </select>
           </div>
           <div className="col-auto">

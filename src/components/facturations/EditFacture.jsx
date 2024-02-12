@@ -15,7 +15,7 @@ export default function EditFacture() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/facture/${idFacture}`)
+      .get(`http://localhost:9090/api/facture/${idFacture}`)
       .then((response) => {
         setFacture(response.data);
         
@@ -37,7 +37,7 @@ export default function EditFacture() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:8080/api/facture/update`, facture)
+      .put(`http://localhost:9090/api/facture/update`, facture)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
       })

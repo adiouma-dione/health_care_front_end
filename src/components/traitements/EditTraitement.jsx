@@ -20,7 +20,7 @@ export default function EditTraitement() {
   useEffect(() => {
     // Effectue une requête GET pour récupérer les détails du produit spécifique
     axios
-      .get(`http://localhost:8080/api/traitement/${idTraitement}`)
+      .get(`http://localhost:9090/api/traitement/${idTraitement}`)
       .then((response) => {
         setTraitement(response.data);
         console.log(response.data);
@@ -42,7 +42,7 @@ export default function EditTraitement() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:8080/api/traitement/update`, traitement)
+      .put(`http://localhost:9090/api/traitement/update`, traitement)
       .then((response) => {
         console.log("Mise à jour avec succès:", response.data);
       })

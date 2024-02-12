@@ -16,7 +16,7 @@ export default function ListConsultation() {
     // Faites appel à votre API Spring Boot avec les paramètres de pagination et de recherche
     axios
       .get(
-        `http://localhost:8080/api/consultation/list?date=&idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
+        `http://localhost:9090/api/consultation/list?date=&idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
         // Mettez à jour les états liés à la pagination
@@ -36,7 +36,7 @@ export default function ListConsultation() {
   const handleDelete = (idConsultation) => {
     if (confirmDelete()) {
       axios
-        .post(`http://localhost:8080/api/consultation/delete/${idConsultation}`)
+        .post(`http://localhost:9090/api/consultation/delete/${idConsultation}`)
         .then((response) => {
           // window.location.reload();
           console.log("Supprimé avec succès:", response.data);

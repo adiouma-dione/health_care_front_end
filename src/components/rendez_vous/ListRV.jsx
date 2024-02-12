@@ -1,19 +1,58 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function ListRV() {
+  // const { username } = useParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState(3);
   const [totalElements, setTotalElements] = useState(0);
   const [visibleRendezVouss, setVisibleRendezVouss] = useState([]);
   const [keyword, setKeyword] = useState("");
 
+  const username = sessionStorage.getItem("username");
+  console.log("============= username : ", username);
+  const [medecin, setMedecin] = useState(null);
+
   useEffect(() => {
     axios
+      .get(`http://localhost:9090/api/medecin-email/${username}`)
+      .then((response) => {
+        setMedecin(response?.data);
+        console.log("medecin : ", medecin);
+      })
+      .catch((error) => {
+        console.error(
+          `Erreur lors de la récupération du pattient ${username}:`,
+          error
+        );
+      });
+  }, [username]);
+
+  useEffect(() => {
+    // if (!isNaN(medecin.idMedecin)) {
+    //   axios
+    //     .get(
+    //       `http://localhost:9090/api/rendezVous/medecin?idMedecin=${medecin.idMedecin}&page=${currentPage}&size=${pageSize}`
+    //     )
+    //     .then((response) => {
+    //       setTotalPages(response.data.totalPages);
+    //       setVisibleRendezVouss(response.data.content);
+    //       console.log(response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.error(
+    //         "Erreur lors de la récupération des rendezVouss:",
+    //         error
+    //       );
+    //     });
+    // }
+    axios
       .get(
-        `http://localhost:8080/api/rendezVous/list?date=${keyword}&page=${currentPage}&size=${pageSize}`
+        medecin && !isNaN(medecin.idMedecin)
+          ? `http://localhost:9090/api/rendezVous/medecin?idMedecin=${medecin.idMedecin}&page=${currentPage}&size=${pageSize}`
+          : `http://localhost:9090/api/rendezVous/list?date=${keyword}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
         setTotalPages(response.data.totalPages);
@@ -23,7 +62,8 @@ export default function ListRV() {
       .catch((error) => {
         console.error("Erreur lors de la récupération des rendezVouss:", error);
       });
-  }, [currentPage, pageSize, keyword]);
+    // }
+  }, [currentPage, pageSize, keyword, medecin]);
 
   const confirmDelete = () => {
     return window.confirm("Êtes-vous sûr de vouloir supprimer ce rendezVous ?");
@@ -32,7 +72,7 @@ export default function ListRV() {
   const handleDelete = (idRendezVous) => {
     if (confirmDelete()) {
       axios
-        .post(`http://localhost:8080/api/rendezVous/delete/${idRendezVous}`)
+        .post(`http://localhost:9090/api/rendezVous/delete/${idRendezVous}`)
         .then((response) => {
           // window.location.reload();
           console.log("Supprimé avec succès:", response.data);
@@ -52,7 +92,7 @@ export default function ListRV() {
     <div className="infos-patient-container mt-5 mb-5">
       <h2 className="mb-5">Liste des rendez Vous</h2>
       <div className="search-and-add">
-        <div className="search">
+        <div className="search me-auto">
           <input
             type="search"
             name="keyword"
@@ -64,21 +104,20 @@ export default function ListRV() {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
-        <div className="add">
+        {/* <div className="add">
           <Link type="button" to="/rendezVouss/add" className="btn btn-primary">
             <i className="bi bi-person-plus-fill"></i> Ajouter un rendezVous
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="table-container">
         <table className="table table-hover table-costum px-2">
           <thead className="table-light">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Prénom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Date</th>
-              <th scope="col">Heure</th>
+              <th scope="col">Patient</th>
+              <th scope="col">Médecin</th>
+              <th scope="col">Statut</th>
               <th></th>
               <th></th>
               <th></th>
@@ -89,13 +128,26 @@ export default function ListRV() {
               visibleRendezVouss.map((rendezVous) => (
                 <tr key={rendezVous.idRendezVous}>
                   <th scope="row">{rendezVous.idRendezVous}</th>
-                  <td>{rendezVous.prenom}</td>
-                  <td>{rendezVous.nom}</td>
-                  <td>{rendezVous.date}</td>
-                  <td>{rendezVous.heure}</td>
+                  <td>
+                    {rendezVous.patient.prenom} {rendezVous.patient.nom}
+                  </td>
+                  <td>
+                    Dr {rendezVous.medecin.prenom} {rendezVous.medecin.nom}
+                  </td>
+                  <td>
+                    {rendezVous.isConfirmed ? (
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        confirmé
+                      </span>
+                    ) : (
+                      <span style={{ color: "red", fontWeight: "bold" }}>
+                        Non confirmé
+                      </span>
+                    )}
+                  </td>
                   <td>
                     <Link
-                      to={`/rendezVouss/${rendezVous.idRendezVous}/dossier`}
+                      to={`/rendezVouss/${rendezVous.idRendezVous}`}
                       className="link-primary"
                     >
                       <i className="bi bi-folder2-open"></i>
@@ -103,7 +155,14 @@ export default function ListRV() {
                   </td>
                   <td>
                     <Link
-                      to={`/rendezVouss/edit/${rendezVous.idRendezVous}`}
+                      // to={`/rendezVouss/edit/${rendezVous.idRendezVous}`}
+                      onClick={() => {
+                        sessionStorage.setItem(
+                          "idRendezVous",
+                          rendezVous.idRendezVous
+                        );
+                      }}
+                      to={"/rendez-vous/edit"}
                       className="link-success"
                     >
                       <i className="bi bi-pencil-square"></i>

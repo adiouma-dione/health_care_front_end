@@ -1,0 +1,13 @@
+[
+    {
+        "idDossierMedical": 1,
+        "idPatient": 1,
+        "adresse": "Thiès",
+        "dateNaissance": "25-06-1990",
+        "email": "aissatou.fall@email.com ",
+        "nom": "Fall",
+        "prenom": "Aïssatou",
+        "sexe": "Femme",
+        "telephone": "770987654"
+    }
+]

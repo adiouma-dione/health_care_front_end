@@ -32,7 +32,7 @@ export default function Add() {
     setPatient(personne);
 
     axios
-      .post("http://localhost:8080/api/patient/add", patient)
+      .post("http://localhost:9090/api/patient/add", patient)
       .then((response) => {
         console.log("Ajouté avec succès:", response.data);
       })

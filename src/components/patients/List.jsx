@@ -3,20 +3,28 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function List() {
+  // localStorage.setItem("data", data);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [pageSize, setPageSize] = useState(2);
+  // const pageSize = 2
+  const [pageSize, setPageSize] = useState(5);
   // const [totalElements, setTotalElements] = useState(0);
   const [visiblePatients, setVisiblePatients] = useState([]);
+  // const [visiblePatients, setVisiblePatients] = useState(data);
   const [keyword, setKeyword] = useState("");
 
-  console.log("Username", sessionStorage.getItem("username"));
-  console.log("Password", sessionStorage.getItem("password"));
+  // ===========================================
+  const username = sessionStorage.getItem("username");
+  const role = sessionStorage.getItem("userRole");
+  console.log("Username : ", username);
+  console.log("Role : ", role);
+
+  // ===========================================
 
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/api/patient/list?name=${keyword}&page=${currentPage}&size=${pageSize}`
+        `http://localhost:9090/api/patient/list?name=${keyword}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
         setTotalPages(response.data.totalPages);
@@ -34,7 +42,7 @@ export default function List() {
   const handleDelete = (idPatient) => {
     if (confirmDelete()) {
       axios
-        .post(`http://localhost:8080/api/patient/delete/${idPatient}`)
+        .post(`http://localhost:9090/api/patient/delete/${idPatient}`)
         .then((response) => {
           // window.location.reload();
           console.log("Supprimé avec succès:", response.data);
@@ -64,10 +72,13 @@ export default function List() {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
+
         <div className="add">
-          <Link type="button" to="/patients/add" className="btn btn-primary">
-            <i className="bi bi-person-plus-fill"></i> Ajouter un patient
-          </Link>
+          {role === "medecin" ? (
+            <Link type="button" to="/patients/add" className="btn btn-primary">
+              <i className="bi bi-person-plus-fill"></i> Ajouter un patient
+            </Link>
+          ) : null}
         </div>
       </div>
       <div className="table-container">
@@ -80,9 +91,15 @@ export default function List() {
               <th scope="col">Date Naissance</th>
               <th scope="col">Sexe</th>
               <th scope="col">Téléphone</th>
-              <th></th>
-              <th></th>
-              <th></th>
+              {role === "medecin" ? (
+                <>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </>
+              ) : (
+                <th></th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -95,31 +112,69 @@ export default function List() {
                   <td>{patient.dateNaissance}</td>
                   <td>{patient.sexe}</td>
                   <td>{patient.telephone}</td>
-                  <td>
-                    <Link
-                      to={`/patients/${patient.idPatient}/dossier`}
-                      className="link-primary"
-                    >
-                      <i className="bi bi-folder2-open"></i>
-                    </Link>
-                  </td>
-                  <td>
-                    <Link
-                      to={`/patients/edit/${patient.idPatient}`}
-                      className="link-success"
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </Link>
-                  </td>
-                  <td>
-                    <Link
-                      to={""}
-                      onClick={() => handleDelete(patient.idPatient)}
-                      className="link-danger"
-                    >
-                      <i className="bi bi-trash3"></i>
-                    </Link>
-                  </td>
+                  {/* role et non username */}
+                  {role === "medecin" ? (
+                    <>
+                      <td>
+                        <Link
+                          to={`/patients/${patient.idPatient}/dossier`}
+                          className="link-primary"
+                        >
+                          <i className="bi bi-folder2-open"></i>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          to={`/patients/edit/${patient.idPatient}`}
+                          className="link-success"
+                        >
+                          <i className="bi bi-pencil-square"></i>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          to={""}
+                          onClick={() => handleDelete(patient.idPatient)}
+                          className="link-danger"
+                        >
+                          <i className="bi bi-trash3"></i>
+                        </Link>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td>
+                        <Link
+                          // to={`/facture/${patient.idPatient}/add`}
+                          onClick={() => {
+                            sessionStorage.setItem(
+                              "idPatient",
+                              patient.idPatient
+                            );
+                          }}
+                          to={`/facture/add`}
+                          className="link-primary"
+                        >
+                          <i className="bi bi-file-earmark-medical-fill"></i>
+                        </Link>
+                      </td>
+                      {/* <td>
+                        <Link
+                          // to={`/facture/${patient.idPatient}/add`}
+                          onClick={() => {
+                            sessionStorage.setItem(
+                              "idPatient",
+                              patient.idPatient
+                            );
+                          }}
+                          to={`/facture/list`}
+                          className="link-success"
+                        >
+                          <i className="bi bi-pencil-square"></i>
+                        </Link>
+                      </td> */}
+                    </>
+                  )}
                 </tr>
               ))}
           </tbody>

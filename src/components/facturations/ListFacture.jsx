@@ -15,7 +15,7 @@ export default function ListFacture() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/api/facture/list?date=&idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
+        `http://localhost:9090/api/facture/list?date=&idDossier=${idPatient}&page=${currentPage}&size=${pageSize}`
       )
       .then((response) => {
         setTotalPages(response.data.totalPages);
@@ -34,7 +34,7 @@ export default function ListFacture() {
   const handleDelete = (idFacture) => {
     if (confirmDelete()) {
       axios
-        .post(`http://localhost:8080/api/facture/delete/${idFacture}`)
+        .post(`http://localhost:9090/api/facture/delete/${idFacture}`)
         .then((response) => {
           // window.location.reload();
           console.log("Supprimé avec succès:", response.data);
